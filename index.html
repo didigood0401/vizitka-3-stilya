@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сайт-визитка в трёх стилях - демо</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Unbounded:wght@600;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0e0f11;color:#eceae6;font:400 16px/1.55 Manrope,system-ui,sans-serif;overflow-x:hidden}
+.top{max-width:1240px;margin:0 auto;padding:28px clamp(16px,2.4vw,36px) 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}
+.top h1{font:800 clamp(28px,4vw,48px)/1.05 Unbounded;letter-spacing:-.03em}
+.top p{color:#a3a6ab;margin-top:8px;max-width:56ch}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl input{background:#1b1d21;border:1.5px solid #2c2f35;color:#fff;border-radius:12px;padding:13px 14px;font:600 16px Manrope;width:240px}
+.ctl input:focus{outline:none;border-color:#c9a86a}
+.seg{display:flex;background:#1b1d21;border-radius:12px;padding:4px;gap:4px}
+.seg button{border:0;background:none;color:#cfd2d6;padding:10px 14px;border-radius:9px;font:700 14px Manrope;cursor:pointer;transition:background .25s,color .25s}
+.seg button.on{background:#eceae6;color:#111}
+.stage{max-width:1240px;margin:0 auto 60px;padding:0 clamp(16px,2.4vw,36px)}
+.frame{border-radius:20px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.7);transition:background .6s}
+.bar{height:36px;background:#1b1d21;display:flex;align-items:center;gap:7px;padding:0 14px}.bar i{width:11px;height:11px;border-radius:50%;background:#3a3d43}.bar span{margin-left:12px;color:#7d8086;font-size:13px}
+.site{min-height:640px;position:relative;overflow:hidden;transition:background .6s,color .6s}
+/* shared */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:22px 34px;position:relative;z-index:2}
+.nm{font-weight:800;letter-spacing:-.02em;font-size:20px}
+.links{display:flex;gap:22px;font-size:14px;opacity:.75}
+.hero{padding:40px 34px 34px;position:relative;z-index:2;max-width:760px}
+.hero h2{line-height:1;letter-spacing:-.03em}
+.hero p{margin:18px 0 26px;max-width:46ch;opacity:.8;font-size:18px}
+.cta{display:inline-block;padding:15px 24px;font-weight:700;text-decoration:none;transition:transform .2s var(--ease)}
+.cta:hover{transform:translateY(-2px)}
+.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 34px 34px;position:relative;z-index:2}
+.blk{padding:20px;border-radius:16px;font-size:15px}.blk b{display:block;font-size:17px;margin-bottom:4px}
+.contacts{padding:0 34px 34px;display:flex;gap:18px;flex-wrap:wrap;font-weight:600;position:relative;z-index:2}
+.anim{opacity:0;transform:translateY(16px);animation:in .7s var(--ease) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+/* style A: editorial */
+.A{background:#f3efe8;color:#1c1a17}
+.A .hero h2{font:400 clamp(44px,7vw,96px)/1 Prata,serif}
+.A .cta{background:#1c1a17;color:#f3efe8}
+.A .blk{background:#e8e2d7}
+.A .deco{position:absolute;right:-60px;top:80px;width:420px;height:420px;border-radius:50%;border:1px solid #c9b994;animation:spin 40s linear infinite}
+.A .deco::after{content:"";position:absolute;inset:40px;border-radius:50%;border:1px solid #d8cbb0}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* style B: bold tech */
+.B{background:#0b0d12;color:#eef1f6}
+.B .hero h2{font:800 clamp(40px,6.4vw,86px)/.98 Unbounded;letter-spacing:-.045em}
+.B .hero h2 span{color:#c6ff3d}
+.B .cta{background:#c6ff3d;color:#0b0d12;border-radius:999px}
+.B .blk{background:#151923;border:1px solid #232938}
+.B .deco{position:absolute;inset:0;background-image:linear-gradient(#1a1f2b 1px,transparent 1px),linear-gradient(90deg,#1a1f2b 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at 75% 30%,#000,transparent 65%);-webkit-mask-image:radial-gradient(circle at 75% 30%,#000,transparent 65%)}
+.B .deco::after{content:"";position:absolute;right:12%;top:18%;width:200px;height:200px;border-radius:30px;background:#c6ff3d;opacity:.9;animation:float 6s ease-in-out infinite;transform:rotate(12deg)}
+@keyframes float{50%{transform:rotate(18deg) translateY(-18px)}}
+/* style C: soft premium */
+.C{background:#1f2b26;color:#f1ede4}
+.C .hero h2{font:400 clamp(42px,6.6vw,90px)/1.02 Prata,serif}
+.C .cta{background:#d9b77a;color:#1f2b26;border-radius:14px}
+.C .blk{background:rgba(255,255,255,.06);backdrop-filter:blur(6px)}
+.C .deco{position:absolute;right:-80px;top:-60px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,#3c5a4c,transparent 65%);animation:breath 7s ease-in-out infinite}
+@keyframes breath{50%{transform:scale(1.12)}}
+.note{max-width:1240px;margin:0 auto;padding:0 clamp(16px,2.4vw,36px) 50px;color:#8a8d92;font-size:14px}
+@media(max-width:860px){.top{grid-template-columns:1fr}.links{display:none}.blocks{grid-template-columns:1fr}.ctl input{width:100%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.anim{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="top">
+ <div><h1>Ваша визитка - в трёх стилях</h1><p>Впишите название сайта - визитка соберётся сразу. Переключайте стиль: классический, смелый технологичный и мягкий премиальный. Выберем лучший и доведём до запуска.</p></div>
+ <div class="ctl"><input id="nm" value="Ваше название" maxlength="28" aria-label="Название сайта"><div class="seg" id="seg"><button class="on" data-s="A">Классика</button><button data-s="B">Смелый</button><button data-s="C">Премиум</button></div></div>
+</div>
+<div class="stage"><div class="frame"><div class="bar"><i></i><i></i><i></i><span id="url">vash-sait.ru</span></div><div class="site A" id="site"></div></div></div>
+<p class="note">Демо: тексты и блоки условные. По вашему примеру сайта и рассказу о бизнесе соберу структуру, тексты, дизайн, подключу домен, почту и форму заявок.</p>
+<script>
+const T={A:{t:n=>n,s:'Спокойная классика: крупная антиква, воздух и тёплая бумага. Для экспертов, студий, юристов, архитекторов.',c:'Связаться'},
+ B:{t:n=>`${n.split(' ')[0]} <span>${n.split(' ').slice(1).join(' ')||'online'}</span>`,s:'Смелая типографика и яркий акцент. Для IT, сервисов, агентств и всех, кому важно выделиться.',c:'Оставить заявку'},
+ C:{t:n=>n,s:'Глубокий цвет и мягкий свет. Для премиальных услуг, частных клиник, салонов и консалтинга.',c:'Записаться'}};
+let st='A';const site=document.getElementById('site'),nm=document.getElementById('nm');
+function slug(s){const m={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'c',ч:'ch',ш:'sh',щ:'sh',ы:'y',э:'e',ю:'yu',я:'ya'};return s.toLowerCase().split('').map(c=>m[c]??c).join('').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'vash-sait'}
+function render(){const n=(nm.value.trim()||'Ваше название'),k=T[st];site.className='site '+st;document.getElementById('url').textContent=slug(n)+'.ru';
+ site.innerHTML=`<div class="deco"></div><div class="nav"><div class="nm">${n}</div><div class="links"><span>О нас</span><span>Услуги</span><span>Контакты</span></div></div>
+ <div class="hero"><h2 class="anim">${k.t(n)}</h2><p class="anim" style="animation-delay:.1s">${k.s}</p><a class="cta anim" style="animation-delay:.2s" href="#">${k.c}</a></div>
+ <div class="blocks">${['Услуги|Что вы делаете и для кого','О нас|История, подход, команда','Почему мы|3-4 сильных аргумента'].map((x,i)=>{const[a,b]=x.split('|');return `<div class="blk anim" style="animation-delay:${.25+i*.08}s"><b>${a}</b>${b}</div>`}).join('')}</div>
+ <div class="contacts anim" style="animation-delay:.5s"><span>✉ почта@${slug(n)}.ru</span><span>☎ +7 000 000-00-00</span></div>`}
+document.getElementById('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));st=b.dataset.s;render()};
+let tm;nm.oninput=()=>{clearTimeout(tm);tm=setTimeout(render,150)};render();
+</script>
+</body>
+</html>
